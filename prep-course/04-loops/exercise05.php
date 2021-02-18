@@ -26,6 +26,6 @@ $persons = [
 
 foreach ($persons as $person) {
     foreach ($person as $key => $val) {
-        echo "$key: $val \n";
+        echo "$key: $val" . PHP_EOL;
     }
 }

@@ -7,5 +7,6 @@ $y = 5;
 $z = 65;
 
 if ($number > $y && $number < $z) {
-    echo "correct";
+    echo "correct" . PHP_EOL;
 }
+    echo "out of range" . PHP_EOL;

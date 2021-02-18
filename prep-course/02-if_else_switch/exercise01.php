@@ -4,9 +4,9 @@ $t = 10;
 $c = "10";
 
 if ($t == $c) {
-    echo 'true';
+    echo 'true' . PHP_EOL;
 } else {
-    echo 'false';
+    echo 'false' . PHP_EOL;
 }
 
 

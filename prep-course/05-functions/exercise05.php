@@ -37,5 +37,5 @@ function checkShippingCost(int $fruitWeight, array $ShippingCost): int
 
 
 foreach ($fruits as $fruit) {
-    echo "We have {$fruit['weight']}kg of {$fruit['name']}, so shipping will cost " . checkShippingCost($fruit['weight'], $ShippingCost) . "€\n";
+    echo "We have {$fruit['weight']}kg of {$fruit['name']}, so shipping will cost " . checkShippingCost($fruit['weight'], $ShippingCost) . "€" . PHP_EOL;
 };

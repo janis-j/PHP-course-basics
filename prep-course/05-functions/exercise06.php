@@ -9,8 +9,8 @@ function doubledInteger($integer)
 
 for ($i = 0; $i < count($array); $i++) {
     if (gettype($array[$i]) === "integer") {
-        echo doubledInteger($array[$i]) . ' ';
+        echo doubledInteger($array[$i]) . PHP_EOL;
     } else {
-        echo $array[$i] . ' ';
+        echo $array[$i] . PHP_EOL;
     }
 }

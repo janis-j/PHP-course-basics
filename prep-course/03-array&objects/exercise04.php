@@ -15,4 +15,6 @@ $items = [
     ]
 ];
 
-echo $items[0][1]["name"] . ' ' . $items[0][1]["surname"] . ' ' . $items[0][1]["age"];
+echo $items[0][1]["name"] . PHP_EOL,
+     $items[0][1]["surname"] . PHP_EOL,
+     $items[0][1]["age"] . PHP_EOL;

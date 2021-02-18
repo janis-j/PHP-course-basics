@@ -17,6 +17,6 @@ $items = [
 
 foreach ($items[0] as $values) {
     foreach ($values as $value) {
-        echo $value . ' ';
+        echo $value . PHP_EOL;
     }
 }

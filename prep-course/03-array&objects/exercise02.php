@@ -8,4 +8,4 @@ $person = [
 
 var_dump($person);
 
-echo $person['name'];
+echo $person['name'] . PHP_EOL;

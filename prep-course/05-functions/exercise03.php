@@ -11,9 +11,9 @@ function checkAge(stdClass $person): string
 }
 
 if (checkAge($person)) {
-    echo "Under 18 - {$person->name} cannot come in!\n";
+    echo "Under 18 - {$person->name} cannot come in!" . PHP_EOL;
 } else {
-    echo "{$person->name} welcome, common in!\n";
+    echo "{$person->name} welcome, common in!" . PHP_EOL;
 }
 
 

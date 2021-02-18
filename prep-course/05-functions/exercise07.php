@@ -25,10 +25,10 @@ $guns = [
 ];
 
 foreach ($guns as $key => $gun) {
-    echo "$key: {$gun['name']}, price: {$gun['price']}€\n";
+    echo "$key: {$gun['name']}, price: {$gun['price']}€ . PHP_EOL";
 }
 
-$witchGun = readline("Witch gun would {$person['name']} like to buy?: ");
+$witchGun = readline("Witch gun would {$person['name']} like to buy?: " . PHP_EOL);
 
 function checkIfEnoughMoney(array $person, array $gun, int $witchGun): bool
 {
@@ -44,15 +44,15 @@ function checkIfValidLicence(array $person, array $gun, int $witchGun): bool
 function validateBuyer(array $person, array $gun, int $witchGun): string
 {
     if (checkIfEnoughMoney($person, $gun, $witchGun) && checkIfValidLicence($person, $gun, $witchGun)) {
-        return "{$gun[$witchGun]['name']} is a good choice, that will be {$gun[$witchGun]['price']}€\n";
+        return "{$gun[$witchGun]['name']} is a good choice, that will be {$gun[$witchGun]['price']}€" . PHP_EOL;
     }
     if (checkIfEnoughMoney($person, $gun, $witchGun) && !checkIfValidLicence($person, $gun, $witchGun)) {
-        return "Sorry, you don't have enough money to buy {$gun[$witchGun]['name']}...\n";
+        return "Sorry, you don't have enough money to buy {$gun[$witchGun]['name']}..." . PHP_EOL;
     }
     if (!checkIfEnoughMoney($person, $gun, $witchGun) && checkIfValidLicence($person, $gun, $witchGun)) {
-        return "Sorry, you don't have the right licence to buy {$gun[$witchGun]['name']}...\n";
+        return "Sorry, you don't have the right licence to buy {$gun[$witchGun]['name']}..." . PHP_EOL;
     }
-    return "Something went wrong";
+    return "Something went wrong" . PHP_EOL;
 }
 
 echo validateBuyer($person, $guns, $witchGun);

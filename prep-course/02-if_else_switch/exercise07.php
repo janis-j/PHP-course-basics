@@ -4,12 +4,12 @@ $number = -1;
 
 switch ($number) {
     case $number < 50:
-        echo "low";
+        echo "low" . PHP_EOL;
         break;
     case $number >= 50 || $number < 100:
-        echo "medium";
+        echo "medium" . PHP_EOL;
         break;
     case $number > 100:
-        echo "high";
+        echo "high" . PHP_EOL;
         break;
 }
