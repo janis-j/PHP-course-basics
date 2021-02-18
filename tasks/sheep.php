@@ -2,7 +2,7 @@
 
 $animals = ['sheep', 'sheep', 'wolf', 'sheep', 'wolf', 'sheep', 'sheep', 'sheep'];
 
-for ($i = 0; $i < count($animals); $i++) {
+for ($i = 0; $i < count($animals)-1; $i++) {
     if ($animals[$i] === 'sheep' && $animals[$i+1] === 'wolf') {
         echo "OMG" . ' ';
     }
