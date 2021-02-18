@@ -10,7 +10,7 @@ $products = [
         "price" => 4
     ],
     [
-        "name" => 'Coffe',
+        "name" => 'Coffee',
         "price" => 7
     ],
     [
@@ -21,7 +21,7 @@ $products = [
 function shopping(array $products): string
 {
     foreach ($products as $key => $product) {
-        echo "$key: {$product['name']}, price: {$product['price']}€ \n";
+        echo "$key: {$product['name']}, price: {$product['price']}€" . PHP_EOL;
     }
     $chooseProduct = readline("What would you like to buy?: ");
 
@@ -29,16 +29,14 @@ function shopping(array $products): string
 
     $totalAmount = $chooseAmount * $products[$chooseProduct]['price'];
 
-    echo "You ordered {$products[$chooseProduct]['name']}, $chooseAmount pcs., total amount {$totalAmount}€\n";
+    echo "You ordered {$products[$chooseProduct]['name']}, $chooseAmount pcs., total amount {$totalAmount}€" . PHP_EOL;
 
-    $reatarOrQuit = readline("Would like to shop some more?(yes/no):");
+    $restartOrQuit = readline("Would like to shop some more?(yes/no):" . PHP_EOL);
 
-    if ($reatarOrQuit === 'yes') {
-        echo shopping($products);
+    if ($restartOrQuit === 'yes') {
+        echo shopping($products) . PHP_EOL;
     }
-    echo "Bye!";
-    return PHP_EOL;
+    return "Bye!" . PHP_EOL;
 }
 
 echo shopping($products);
-//
