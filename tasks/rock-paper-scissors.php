@@ -28,12 +28,12 @@ foreach ($items as $key => $item) {
 
 $personMove = null;
 $pcMove = array_rand($validMoves, 1);
-$trueFalse = false;
+$validMove = false;
 
-while (!$trueFalse) {
+while (!$validMove) {
     $personMove = readline("make move:");
     if (in_array($personMove, $validMoves)) {
-        $trueFalse = true;
+        $validMove = true;
     }
     echo "try again, valid moves are: 0  1  2" . PHP_EOL;
 }
