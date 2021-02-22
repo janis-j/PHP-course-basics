@@ -106,7 +106,7 @@ while (true) {
                 print("\033[2J\033[;H");
                 takeMoneyOutFromWallet($coinsInputArray, $wallet);
                 ifNeedToGiveChange($coinsInputArray, $coffeePrices, $witchCoffee, $wallet,$changeInCoins);
-                echo "You're change (coins): " . implode(' ', $changeInCoins) . " ,in TOTAL: "
+                echo "Your change (coins): " . implode(' ', $changeInCoins) . " ,in TOTAL: "
                     . (sprintf('%.2f', array_sum($coinsInputArray) / 100 - $coffeePrices[$witchCoffee])) . "€" . PHP_EOL;
                 echo "Money in wallet: " . sumOfMoneyInWallet($wallet) . "€" . PHP_EOL;
                 exit("Thank you, Enjoy!" . PHP_EOL);
@@ -116,7 +116,7 @@ while (true) {
             } else {
                 print("\033[2J\033[;H");
                 echo "You don't have enough " . ifEnoughMoneyInWallet($coinsInputArray, $wallet, $coffeePrices, $witchCoffee)
-                    . " cent coins in you're wallet.. try again!" . PHP_EOL;
+                    . " cent coins in your wallet.. try again!" . PHP_EOL;
                 exit("Bye!" . PHP_EOL);
             }
         } else {
