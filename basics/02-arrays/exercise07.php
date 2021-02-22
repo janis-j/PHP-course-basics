@@ -46,28 +46,50 @@ function checkIfWordIsGuessed(array $wordToGuessHidden): bool
 }
 
 while (true) {
-    print("\033[2J\033[;H");
-    echo "<==================================>" . PHP_EOL;
-    echo "Word:     ";
-    foreach ($wordToGuessHidden as $letter) {
-        echo $letter;
-    };
-    echo PHP_EOL;
-    foreach ($arrayToDisplay as $key => $line) {
-        echo $line . PHP_EOL;
-    }
-    if (checkIfWordIsGuessed($wordToGuessHidden)) {
-        $letterGuess = strtolower(readline("Guess: "));
-        if (in_array($letterGuess . " ", $wordToGuess[$randomNum])) {
-            fillGuessedLetters($wordToGuess, $wordToGuessHidden, $letterGuess, $randomNum);
-        } else {
-            $arrayToDisplay[$lineToPushIn] = $hanger[$lineToPushIn];
-            $lineToPushIn -= 1;
+    if ($lineToPushIn > -2) {
+        print("\033[2J\033[;H");
+        echo "<==================================>" . PHP_EOL;
+        echo "Word:     ";
+        foreach ($wordToGuessHidden as $letter) {
+            echo $letter;
+        };
+        echo PHP_EOL;
+        foreach ($arrayToDisplay as $key => $line) {
+            echo $line . PHP_EOL;
         }
-    } else {
-        echo "Nice, you won! ";
-        $restartOrQuit = readline("Play 'again' or 'quit'?");
-        if ($restartOrQuit === 'again') {
+        if (checkIfWordIsGuessed($wordToGuessHidden)) {
+            $letterGuess = strtolower(readline("Guess: "));
+            if (in_array($letterGuess . " ", $wordToGuess[$randomNum])) {
+                fillGuessedLetters($wordToGuess, $wordToGuessHidden, $letterGuess, $randomNum);
+            } else {
+                $arrayToDisplay[$lineToPushIn] = $hanger[$lineToPushIn];
+                $lineToPushIn -= 1;
+            }
+        } else {
+            echo "Nice, you won! ";
+            $restartOrQuit = readline("Play 'again' or 'quit'?");
+            if ($restartOrQuit === 'again') {
+                $lineToPushIn = 5;
+                $randomNum = rand(0, 3);
+                $wordToGuessHidden = array_fill(0, count($wordToGuess[$randomNum]), "_ ");
+                $arrayToDisplay = [
+                    " ",
+                    " ",
+                    " ",
+                    " ",
+                    " ",
+                    " ",
+                    "<==================================>"
+                ];
+            } else if ($restartOrQuit === 'quit') {
+                exit("Bye!" . PHP_EOL);
+            }
+        }
+    } else{
+        echo "Sorry, you loose!" . PHP_EOL;
+        $restartOrQuit2 = readline("Play 'again' or 'quit'?");
+        if ($restartOrQuit2 === 'again') {
+            $lineToPushIn = 5;
             $randomNum = rand(0, 3);
             $wordToGuessHidden = array_fill(0, count($wordToGuess[$randomNum]), "_ ");
             $arrayToDisplay = [
@@ -79,7 +101,7 @@ while (true) {
                 " ",
                 "<==================================>"
             ];
-        } else if ($restartOrQuit === 'quit') {
+        } else if ($restartOrQuit2 === 'quit') {
             exit("Bye!" . PHP_EOL);
         }
     }
