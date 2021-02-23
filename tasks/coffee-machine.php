@@ -73,9 +73,9 @@ function ifNeedToGiveChange(array $coinsInputArray, array $coffeePrices, int $wi
             if ($change < $coin || $wallet[$coin] < 0) {
                 continue;
             } else {
-                $change -= $coin;
-                $wallet[$coin] += 1;
-                array_push($changeInCoins,$coin);
+                    $change -= $coin;
+                    $wallet[$coin] += 1;
+                    array_push($changeInCoins, $coin);
             }
         }
     }
@@ -101,8 +101,10 @@ while (true) {
         echo "Money in wallet: " . sumOfMoneyInWallet($wallet) . "€" . PHP_EOL;
         $youHaveToPay = readline("You have to pay " . (sprintf('%.2f', $coffeePrices[$witchCoffee])) . '€: ');
         $coinsInputArray = explode(' ', $youHaveToPay);
-        if (ifInputCoinsValidAndEnough($coinsInputArray)) {
-            if (ifEnoughMoneyInWallet($coinsInputArray, $wallet, $coffeePrices, $witchCoffee) === "true") {
+        if (ifInputCoinsValidAndEnough($coinsInputArray))
+        {
+            if (ifEnoughMoneyInWallet($coinsInputArray, $wallet, $coffeePrices, $witchCoffee) === "true")
+            {
                 print("\033[2J\033[;H");
                 takeMoneyOutFromWallet($coinsInputArray, $wallet);
                 ifNeedToGiveChange($coinsInputArray, $coffeePrices, $witchCoffee, $wallet,$changeInCoins);
@@ -110,7 +112,9 @@ while (true) {
                     . (sprintf('%.2f', array_sum($coinsInputArray) / 100 - $coffeePrices[$witchCoffee])) . "€" . PHP_EOL;
                 echo "Money in wallet: " . sumOfMoneyInWallet($wallet) . "€" . PHP_EOL;
                 exit("Thank you, Enjoy!" . PHP_EOL);
-            } else if (ifEnoughMoneyInWallet($coinsInputArray, $wallet, $coffeePrices, $witchCoffee) === "false") {
+            }
+            else if (ifEnoughMoneyInWallet($coinsInputArray, $wallet, $coffeePrices, $witchCoffee) === "false")
+            {
                 print("\033[2J\033[;H");
                 echo "Sorry, insufficient funds!" . PHP_EOL;
             } else {
