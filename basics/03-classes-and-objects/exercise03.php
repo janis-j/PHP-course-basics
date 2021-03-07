@@ -28,7 +28,8 @@ class FuelGauge
     public function fillTank(int $amount): string
     {
         if ($this->litersInTank + $amount > 70) {
-            return "There is " . $this->litersInTank . " liters in tang already, you can add " . (70 - $this->litersInTank) . "liters or less.." . PHP_EOL;
+            return "There is " . $this->litersInTank . " liters in tang already, you can add " . (70 - $this->litersInTank) .
+                "liters or less.." . PHP_EOL;
         }
         $this->litersInTank += $amount;
         return "All good, have a nice trip!" . PHP_EOL;

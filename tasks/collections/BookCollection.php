@@ -3,11 +3,17 @@
 
 class BookCollection
 {
+    private array $books = [];
 
-    /**
-     * BookCollection constructor.
-     */
-    public function __construct()
+    public function add(Book $book): void
     {
+        $this->books[] = $book;
+    }
+
+    public function removeAt(int $index):  void{
+        if(!isset($this->books[$index])){
+            throw new OutOfRangeException('Book at index ' . $index . ' not found.');
+        }
+            unset($this->books[$index]);
     }
 }

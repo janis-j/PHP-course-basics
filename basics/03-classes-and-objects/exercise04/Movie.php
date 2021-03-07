@@ -18,6 +18,11 @@ class Movie
     {
         return $this->rating;
     }
+
+    public function getName(): string
+    {
+        return $this->movie;
+    }
 }
 
 

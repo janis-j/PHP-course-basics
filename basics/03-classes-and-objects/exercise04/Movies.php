@@ -10,13 +10,9 @@ class Movies
         $this->movies[] = $movie;
     }
 
-    public function getPG(): array
-    {
-        $tempArray = [];
-        foreach ($this->movies as $key => $movie) {
-            if ($movie->getRating() === 'PG')
-                $tempArray[] = $movie;
-        }
-        return $tempArray;
+    public function getPG(): array{
+        return array_filter($this->movies, function(Movie $movie){
+            return $movie->getRating() === "PG";
+        });
     }
 }

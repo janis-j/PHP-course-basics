@@ -6,28 +6,29 @@ class Student
     private int $age;
     private int $grade;
 
-    function __construct(string $name, string $age)
+    public function __construct(string $name, string $age)
     {
         $this->name = $name;
         $this->age = $age;
         $this->calculateGrade($this->age);
     }
 
-    function getName(): string{
+    public function getName(): string
+    {
         return $this->name;
     }
 
-    function setGrade(int $grade): void
+    public function setGrade(int $grade): void
     {
         $this->grade = $grade;
     }
 
-    function getGrade(): int
+    public function getGrade(): int
     {
         return $this->grade;
     }
 
-    function calculateGrade(int $age): void
+    private function calculateGrade(int $age): void
     {
         switch ($age) {
             case 7:
@@ -56,19 +57,19 @@ class School
 {
     private array $students = [];
 
-    function addStudent(Student $student): void
+    public function addStudent(Student $student): void
     {
         $this->students[] = $student;
     }
 
-    function addFewStudents(array $students): void
+    public function addFewStudents(array $students): void
     {
         foreach ($students as $student) {
             $this->addStudent($student);
         }
     }
 
-    function getSpecificGrade(int $grade): array
+    public function getSpecificGrade(int $grade): array
     {
         $tempArray = [];
         foreach ($this->students as $index => $student) {
@@ -79,11 +80,12 @@ class School
         return $tempArray;
     }
 
-    function getAllStudents(): array
+    public function getAllStudents(): array
     {
         return $this->students;
     }
 }
+
 $john = new Student('John', 7);
 $school = new School();
 $school->addStudent($john);
@@ -94,12 +96,12 @@ $school->addFewStudents([new Student('Rita', 7),
 
 $john->setGrade(2);
 
-foreach($school->getAllStudents() as $student){
+foreach ($school->getAllStudents() as $student) {
     echo $student->getName() . ' ' . $student->getGrade() . PHP_EOL;
 }
 
 
-foreach($school->getSpecificGrade(2) as $student){
+foreach ($school->getSpecificGrade(2) as $student) {
     echo $student->getName() . ' ' . $student->getGrade() . PHP_EOL;
 }
 

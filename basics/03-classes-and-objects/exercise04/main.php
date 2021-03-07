@@ -8,4 +8,7 @@ $movies->addMovie(new Movie('Casino Royale', 'Eon Productions', 'PG13'));
 $movies->addMovie(new Movie('Glass', 'Buena Vista International', 'PG'));
 $movies->addMovie(new Movie('Spider-Man: Into the Spider-Verse', 'Columbia Pictures', 'PG'));
 
-var_dump($movies->getPG());
+echo "Movies with rating 'PG'";
+foreach($movies->getPG() as $movie){
+    echo $movie->getName() . PHP_EOL;
+};
