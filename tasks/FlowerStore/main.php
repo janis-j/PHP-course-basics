@@ -11,8 +11,9 @@ require_once 'Warehouse1.php';
 require_once 'Warehouse2.php';
 require_once 'Warehouse3.php';
 require_once 'FlowerShop.php';
-require_once 'Application.php';
+require_once 'Application1.php';
 
-(new Application)->run();
+$app = new Application1;
+$app->run();
 
 

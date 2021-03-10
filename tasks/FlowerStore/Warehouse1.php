@@ -2,7 +2,7 @@
 
 class Warehouse1 implements iWarehouse
 {
-    private array $fridge;
+    protected array $fridge;
 
     private function addFlower(Flowers $flower): void
     {
@@ -19,10 +19,8 @@ class Warehouse1 implements iWarehouse
     public function getAmount(string $flowerName): int
     {
         $tempInteger = 0;
-        foreach($this->fridge as $flower)
-        {
-            if($flower->getName() === $flowerName)
-            {
+        foreach ($this->fridge as $flower) {
+            if ($flower->getName() === $flowerName) {
                 $tempInteger = $flower->getAmount();
             }
         }
@@ -31,10 +29,8 @@ class Warehouse1 implements iWarehouse
 
     public function setAmount(string $flowerName, int $amountToAdd): void
     {
-        foreach($this->fridge as $flower)
-        {
-            if($flower->getName() === $flowerName)
-            {
+        foreach ($this->fridge as $flower) {
+            if ($flower->getName() === $flowerName) {
                 $flower->setAmount($amountToAdd);
             }
         }

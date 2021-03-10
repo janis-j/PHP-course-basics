@@ -1,6 +1,6 @@
 <?php
 
-class Application
+class Application1
 {
     private FlowerShop $flowerShop;
 
@@ -31,28 +31,28 @@ class Application
             }
 
             foreach ($this->flowerShop->getShopStock() as $flower => $quantity) {
-                echo sprintf("%-10s", $flower) . ":" . sprintf("%-3s", $quantity) . " available - "
-                    . $this->flowerShop->getPrice($flower, 1, 1) . " | W1: " . $warehouse1->getAmount($flower)
+                $f = new NumberFormatter("en", NumberFormatter::CURRENCY);
+                echo sprintf("%-11s", "$flower:") . sprintf("%-3s", $quantity) . " available - "
+                    . $f->formatCurrency(FlowerShop::PRICES[$flower] / 100, "EUR") . " | W1: " . $warehouse1->getAmount($flower)
                     . " | W2: " . $warehouse2->getAmount($flower) . " | W3: " . $warehouse3->getAmount($flower) . PHP_EOL;
             }
 
-            $gender = strtolower(readline("What is you're gender (f/m)?: "));
-            $witchFlowers = ucfirst(strtolower(readline("Which flowers you would like to buy?: ")));
-            $amount = (int)readline("How many?: ");
 
-            $this->flowerShop->removeQuantity($witchFlowers, $amount);
+            $whichFlowers = ucfirst(strtolower(readline("Which flowers you would like to buy?: ")));
+            $amount = (int)readline("How many?: ");
+            $gender = strtolower(readline("What is you're gender (f/m)?: "));
 
             switch ($gender) {
                 case 'm':
-                    echo "Good choice! $witchFlowers, $amount pcs in total: " .
-                        $this->flowerShop->getPrice($witchFlowers, $amount, 1) . PHP_EOL;
+                    echo $this->flowerShop->getPrice($whichFlowers, $amount, 1) . PHP_EOL;
                     sleep(3);
                     break;
                 case 'f':
-                    echo "20% discount just for you!! $witchFlowers, $amount pcs in total: " .
-                        $this->flowerShop->getPrice($witchFlowers, $amount, 1.2) . PHP_EOL;
+                    echo $this->flowerShop->getPrice($whichFlowers, $amount, 1.2) . PHP_EOL;
                     sleep(3);
                     break;
+                default:
+                    echo 'Sorry, input vas invalid...' . PHP_EOL;
             }
         }
     }
