@@ -1,19 +1,21 @@
 <?php
 
-// FlowerShop
-//List of flowers & prices
-//Option to purchase
-//if female -> apply - 20% discount at the end
-//3 different warehouse where flowers come from
-require_once 'iWarehouse.php';
-require_once 'Flowers.php';
-require_once 'Warehouse1.php';
-require_once 'Warehouse2.php';
-require_once 'Warehouse3.php';
-require_once 'FlowerShop.php';
-require_once 'Application1.php';
+namespace FlowerStore;
 
-$app = new Application1;
-$app->run();
+require_once 'iGoods.php';
+require_once 'Warehouses/iWarehouse.php';
+require_once 'Goods/Flower.php';
+require_once 'Product.php';
+require_once 'ProductCollection.php';
+require_once 'Warehouses/Warehouse1.php';
+require_once 'Warehouses/Warehouse2.php';
+require_once 'Warehouses/Warehouse3.php';
+require_once 'FlowerShop.php';
+require_once 'Application.php';
+
+$flowerShop = new Application();
+
+$flowerShop->run();
+
 
 

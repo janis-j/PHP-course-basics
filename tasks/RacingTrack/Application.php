@@ -12,47 +12,44 @@ class Application2
             new Racer(3, 2, 0, [2, 3], [97, 15]),
             new Racer(4, 3, 0, [1, 2], [98, 2])
         ]);
+
         $rows = count($racersCollection->getRacersCollection());
         $track = new RacingTrack(30, $rows);
 
-        $timeLapse = 0;
-        $leaderBoard = [];
-        $crashedBoard = [];
         while (true) {
             print("\033[2J\033[;H");
             $randomNum = random_int(1, 100);
 
-            $timeLapse++;
+            $track->timeTick();
 
-            $copyTrack = $track->getTrack();
+            $redrawTrack = $track->getTrack();
 
             foreach ($racersCollection->getRacersCollection() as $racer) {
-                $copyTrack[$racer->getCoordinates()[0]][$racer->getCoordinates()[1]] = $racer->getRacersNumber();
-
+                $redrawTrack[$racer->getCoordinates()[0]][$racer->getCoordinates()[1]] = $racer->getRacersNumber();
                 if (!$racer->getIfFinished() && $racer->getCoordinates()[1] === $track->getLength()) {
-                    $leaderBoard[] = 'Racer No ' . $racer->getRacersNumber() . " finished in $timeLapse sec.";
+                    $track->addFinished($racer->getRacersNumber(), $track->getTime());
                     $racer->setFinished();
-                }else if(!$racer->getIfFinished() && in_array($randomNum, $racer->getCrashCo())){
-                    $crashedBoard[] = 'Racer No ' . $racer->getRacersNumber() . " crashed in $timeLapse sec.";
+                } else if (!$racer->getIfFinished() && in_array($randomNum, $racer->getCrashCo())) {
+                    $track->addCrashed($racer->getRacersNumber());
                     $racer->setFinished();
                     $racer->setStartNumber();
                 }
                 $racer->addYCoord($track->getLength());
             }
-            foreach ($copyTrack as $line) {
+            foreach ($redrawTrack as $line) {
                 echo implode($line) . PHP_EOL;
             }
             echo PHP_EOL;
             echo "---------LEADERBOARD----------" . PHP_EOL;
-            foreach ($leaderBoard as $key => $racer) {
-                echo ($key+1) .". " . $racer . PHP_EOL;
+            foreach ($track->getFinished() as $key => $racer) {
+                echo ($key + 1) . '. racer no ' . $racer[0] . " finished in " . $racer[1] . PHP_EOL;
             }
-            foreach ($crashedBoard as $racer) {
-                echo $racer . PHP_EOL;
+            foreach ($track->getCrashed() as $racer) {
+                echo 'Racer no ' . $racer . ' crashed..' . PHP_EOL;
             }
             sleep(1);
 
-            if (count($leaderBoard) + count($crashedBoard) === $rows) {
+            if (count($track->getFinished()) + count($track->getCrashed()) === $rows) {
                 exit('Bye!' . PHP_EOL);
             };
         }
