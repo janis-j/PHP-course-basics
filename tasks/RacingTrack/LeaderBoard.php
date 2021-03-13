@@ -1,11 +1,5 @@
 <?php
 
-class LeaderBoard
-{
-    private int $timeFinished;
+namespace RacingTrack;
 
-    public function setTimeFinished()
-    {
-
-    }
-}
+class Leaderboard

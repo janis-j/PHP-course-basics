@@ -1,0 +1,16 @@
+{
+  "name": "janis/flower-store",
+  "authors": [
+    {
+      "name": "janis",
+      "email": "jaanis.jankovs@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "description": ""
+}

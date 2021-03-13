@@ -1,6 +1,8 @@
 <?php
 
-namespace FlowerStore;
+namespace App;
+
+use App\Warehouses\iWarehouse;
 
 class FlowerStore
 {

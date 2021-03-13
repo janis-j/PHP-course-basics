@@ -1,6 +1,8 @@
 <?php
 
-namespace FlowerStore;
+namespace App\Warehouses;
+
+use App\ProductCollection;
 
 interface iWarehouse
 {

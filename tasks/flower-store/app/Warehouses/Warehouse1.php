@@ -1,6 +1,11 @@
 <?php
 
-namespace FlowerStore;
+namespace App\Warehouses;
+
+use App\Goods\Flower;
+use App\Product;
+use App\ProductCollection;
+
 
 class Warehouse1 implements iWarehouse
 {
