@@ -1,0 +1,16 @@
+{
+  "name": "janis/racing-track",
+  "description": "description",
+  "authors": [
+    {
+      "name": "janis",
+      "email": "jaanis.jankovs@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "RacingApp\\": "racing-app/"
+    }
+  }
+}
