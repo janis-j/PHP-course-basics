@@ -1,0 +1,65 @@
+body {
+    background-color: #f6f6ff;
+    font-family: Calibri, Myriad, serif;
+}
+
+#main {
+    width: 780px;
+    padding: 20px;
+    margin: auto;
+}
+
+table.carRent {
+    margin: auto;
+    width: 600px;
+    border-collapse: collapse;
+}
+
+table.carRent caption {
+    background-color: #f79646;
+    color: #fff;
+    font-size: x-large;
+    font-weight: bold;
+    letter-spacing: .3em;
+}
+
+table.carRent thead th {
+    padding: 8px;
+    background-color: #fde9d9;
+    font-size: large;
+}
+
+table.carRent thead th#thDay {
+    width: 40%;
+}
+
+table.carRent thead th#thRegular, table.carRent thead th#thOvertime, table.carRent thead th#thTotal {
+    width: 20%;
+}
+
+table.carRent th, table.carRent td {
+    padding: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f79646 #ccc;
+}
+
+table.carRent td {
+    text-align: right;
+}
+
+table.carRent tbody th {
+    text-align: left;
+    font-weight: normal;
+}
+
+table.carRent tfoot {
+    font-weight: bold;
+    font-size: large;
+    background-color: #687886;
+    color: #fff;
+}
+
+table.carRent tr.even {
+    background-color: #fde9d9;
+}
