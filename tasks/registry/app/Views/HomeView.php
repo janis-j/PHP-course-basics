@@ -13,9 +13,9 @@ namespace App\Views;
 </head>
 <body>
 <h2>DATABASE</h2>
-<form method="post">
-    <label for="input"></label><input type="text" id="input" name="textInput">
-    <input type="submit" value="Search"><br>
+<form method="post" action="/search">
+    <label for="inputData"></label><input type="text" id="inputData" name="textInput">
+    <input type="submit" value="search" name="search"><br>
     Search by
     <input type="radio" id="column1" name="radioInput" value="id">
     <label for="column1"> Id </label>
@@ -26,7 +26,8 @@ namespace App\Views;
     <br><br>
     <table>
 </form>
-<form method="post">
+
+<form method="post" action="/delete">
     <table>
         <tr>
             <th></th>
@@ -35,20 +36,27 @@ namespace App\Views;
             <th>Surname</th>
             <th>Description</th>
         </tr>
+
         <?PHP
-        foreach ($registry->collection() as $person) {
-            echo "<tr>{$person->allInfo()}</tr>";
+        if (isset($_POST['search'])) {
+            foreach ($collection->collection() as $person) {
+                echo "<tr>{$person->allInfo()}</tr>";
+            }
         }
         ?>
-    </table><br>
-    <input type="submit" value="Delete person" name="deleted"><br><br>
+    </table>
+    <br>
+    <input type="submit" value="delete person" name="delete">
+    <br><br>
     <label for="input"></label><input type="text" id="input" name="descriptionInput">
-    <input type="submit" value="Change description" name="submitted"><br><br>
-    <label for="input">id:</label><input type="text" id="input" name="id"><br>
-    <label for="input">name:</label><input type="text" id="input" name="name"><br>
-    <label for="input">surname:</label><input type="text" id="input" name="surname"><br>
-    <label for="input">description:</label><input type="text" id="input" name="description">
-    <input type="submit" value="Add new person" name="newPersonInput">
+    <input type="submit" value="change description" name="change" formaction="/change"><br><br>
+</form>
+<form method="post" action="/store">
+    <label for="input1">id:</label><input type="text" id="input1" name="id"><br>
+    <label for="input2">name:</label><input type="text" id="input2" name="name"><br>
+    <label for="input3">surname:</label><input type="text" id="input3" name="surname"><br>
+    <label for="input4">description:</label><input type="text" id="input4" name="description">
+    <input type="submit" value="store person" name="store">
 </form>
 </body>
 </html>

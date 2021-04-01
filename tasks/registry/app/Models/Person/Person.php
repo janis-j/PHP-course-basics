@@ -11,10 +11,25 @@ class Person
 
     public function __construct(string $id, string $name, string $surname, string $description)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->surname = $surname;
+        $this->setId($id);
+        $this->setName($name);
+        $this->setSurname($surname);
         $this->description = $description;
+    }
+
+    private function setId(string $id): void
+    {
+        $this->id = str_replace( '-','',$id);
+    }
+
+    private function setName(string $name): void
+    {
+        $this->name = ucfirst(strtolower($name));
+    }
+
+    private function setSurname(string $surname): void
+    {
+        $this->surname = ucfirst(strtolower($surname));
     }
 
     public function id(): string
@@ -52,5 +67,15 @@ class Person
             <td>{$this->surname}</td>
             <td>{$this->description}</td>
         ";
+    }
+
+    public function toArray(): array
+    {
+         return [
+             "id" => $this->id(),
+             "name" => $this->name(),
+             "surname" => $this->surname(),
+             "description" => $this->description(),
+         ];
     }
 }
