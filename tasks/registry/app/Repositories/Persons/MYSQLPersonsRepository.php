@@ -15,8 +15,8 @@ class MYSQLPersonsRepository implements PersonsRepository
             'database_type' => 'mysql',
             'database_name' => 'codelex',
             'server' => 'localhost',
-            'username' => 'janis',
-            'password' => 'Maximus21@'
+            'username' => '',
+            'password' => ''
         ]);
     }
 
