@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body class="font-Helvetica">
+<div class="grid grid-cols-1 gap-2 m-2">
+    <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
+        <h2>DATABASE</h2>
+        <form method="post" action="/search">
+            <label for="inputData"></label>
+            <input type="text" id="inputData" class="rounded" name="textInput">
+            <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
+                   value="search" name="search"><br>
+            Search by
+            <input type="radio" id="column1" name="radioInput" value="id">
+            <label for="column1"> Id </label>
+            <input type="radio" id="column2" name="radioInput" value="name">
+            <label for="column2"> Name </label>
+            <input type="radio" id="column3" name="radioInput" value="surname">
+            <label for="column3"> Surname </label>
+            <input type="radio" id="column4" name="radioInput" value="age">
+            <label for="column4"> Age </label>
+            <input type="radio" id="column5" name="radioInput" value="address">
+            <label for="column5"> Address ~ </label>
+        </form>
+    </div>
+    <br>
+    <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
+        <form method="post" action="/delete">
+            <table class="table-auto border-separate border">
+                <tr>
+                    <th></th>
+                    <th class="border border-green-600">Id</th>
+                    <th class="border border-green-600">Name</th>
+                    <th class="border border-green-600">Surname</th>
+                    <th class="border border-green-600">Age</th>
+                    <th class="border border-green-600">Address</th>
+                    <th class="border border-green-600">Description</th>
+                </tr>
+                {% if post.search is defined %}
+                    {% for person in personsList %}
+                        <tr>
+                            <td><input type='radio' id='column1' name='pickPerson' value={{ person.id }}>
+                            <td class="border border-green-600">{{ person.id }}</td>
+                            <td class="border border-green-600">{{ person.name }}</td>
+                            <td class="border border-green-600">{{ person.surname }}</td>
+                            <td class="border border-green-600">{{ person.age }}</td>
+                            <td class="border border-green-600">{{ person.address }}</td>
+                            <td class="border border-green-600">{{ person.description }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+            <br>
+            <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded" value="delete person"
+                   name="delete">
+            <br><br>
+            <label for="input"></label><input type="text" class="rounded" id="input" name="descriptionInput">
+            <br>
+            <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
+                   value="change description"  name="change" formaction="/change">
+        </form>
+    </div>
+    <br>
+    <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
+        <form method="post" action="/store">
+            <table>
+                <tr>
+                    <td><label for="input1">Id: </label></td>
+                    <td><input type="text" class="rounded" id="input1" name="id" size="12" maxlength="12">
+                        <comment class="{{ error  ?  'text-red-600'  :  'text-red-600' }}">
+                            {{ validId }}
+                        </comment>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="input2">Name:</label></td>
+                    <td><input type="text" class="rounded" id="input2" name="name" size="12">
+                        <comment class="{{ error  ?  'text-red-600'  :  'text-red-600' }}"> {{ validName }} </comment>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="input3">Surname:</label></td>
+                    <td><input type="text" class="rounded" id="input3" name="surname" size="12">
+                        <comment
+                                class="{{ error  ?  'text-red-600'  :  'text-red-600' }}"> {{ validSurname }} </comment>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="input4">Age:</label></td>
+                    <td><input type="number" class="rounded" id="input4" name="age" size="3" max="105">
+                        <comment class="{{ error  ?  'text-red-600'  :  'text-red-600' }}"> {{ validAge }} </comment>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="input5">Address:</label></td>
+                    <td><input type="text" class="rounded" id="input5" name="addressName" placeholder="Street name"
+                               size="12"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="rounded" id="input5" name="addressNumber" placeholder="House-flat num"
+                               size="6"
+                               maxlength="7"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="rounded" id="input5" name="addressCity" placeholder="City" size="12">
+                    </td>
+                <tr>
+                    <td></td>
+                    <td><input type="text" class="rounded" id="input5" name="addressCountry" placeholder="Country"
+                               size="12"></td>
+                </tr>
+                <tr>
+                    <td><label for="input6">Description:</label></td>
+                    <td><input type="text" class="rounded" id="input6" name="description"></td>
+                </tr>
+            </table>
+            <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded" value="store person"
+                   name="store">
+        </form>
+    </div>
+</div>
+</body>
+</html>

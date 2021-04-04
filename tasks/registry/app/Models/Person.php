@@ -1,10 +1,8 @@
 <?php
 
+namespace App\Models;
 
-namespace App\Services;
-
-
-class StorePersonRequest
+class Person
 {
     private string $id;
     private string $name;
@@ -22,12 +20,41 @@ class StorePersonRequest
         string $description
     )
     {
-
-        $this->id = $id;
+        $this->setId($id);
         $this->setName($name);
         $this->setSurname($surname);
+        $this->setAge($age);
+        $this->setAddress($address);
+        $this->setDescription($description);
+    }
+
+    private function setId(string $id): void
+    {
+        $this->id = str_replace( '-','',$id);
+    }
+
+    private function setName(string $name): void
+    {
+        $this->name = ucfirst(strtolower($name));
+    }
+
+    private function setSurname(string $surname): void
+    {
+        $this->surname = ucfirst(strtolower($surname));
+    }
+
+    private function setAge(int $age): void
+    {
         $this->age = $age;
+    }
+
+    private function setAddress(string $address)
+    {
         $this->address = $address;
+    }
+
+    private function setDescription(string $description): void
+    {
         $this->description = $description;
     }
 
@@ -61,17 +88,15 @@ class StorePersonRequest
         return $this->description;
     }
 
-
-
-    private function setName(string $name)
+    public function toArray(): array
     {
-        $toLower = mb_strtolower($name);
-        $this->name = mb_strtoupper(substr($toLower,0,1)) . substr($toLower,1);
-    }
-
-    private function setSurname(string $surname)
-    {
-        $toLower = mb_strtolower($surname);
-        $this->surname = mb_strtoupper(substr($toLower,0,1)) . substr($toLower,1);
+        return [
+            "id" => $this->id(),
+            "name" => $this->name(),
+            "surname" => $this->surname(),
+            "age" => $this->age(),
+            "address" =>$this->address(),
+            "description" => $this->description(),
+        ];
     }
 }

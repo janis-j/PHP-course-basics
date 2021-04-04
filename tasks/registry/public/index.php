@@ -1,13 +1,13 @@
 <?php
 
+require '../vendor/autoload.php';
+
 use App\Controllers\DeleteChangeController;
 use App\Controllers\HomeController;
 use App\Repositories\Persons\MYSQLPersonsRepository;
 use App\Repositories\Persons\PersonsRepository;
 use App\Services\DeleteChangePersonService;
 use App\Services\StorePersonService;
-
-require '../vendor/autoload.php';
 
 $container = new League\Container\Container;
 
@@ -37,7 +37,6 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
 //    $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
 });
 
-var_dump($_POST);
 // Fetch method and URI from somewhere
 $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];

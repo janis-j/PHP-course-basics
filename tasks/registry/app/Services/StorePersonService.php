@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Person\Person;
+use App\Models\Person;
 use App\Models\PersonsCollection;
 use App\Repositories\Persons\PersonsRepository;
 
@@ -21,6 +21,8 @@ class StorePersonService
             $request->id(),
             $request->name(),
             $request->surname(),
+            $request->age(),
+            $request->address(),
             $request->description()
         );
             $this->personsRepository->save($person);
@@ -34,6 +36,8 @@ class StorePersonService
                 $person["id"],
                 $person["name"],
                 $person["surname"],
+                $person["age"],
+                $person["address"],
                 $person["description"]
             ));
         }

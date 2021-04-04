@@ -13,8 +13,9 @@
         "catfan/medoo": "^1.7",
         "league/container": "^3.3",
       "ext-json": "*",
-        "symfony/validator": "^5.2",
-        "doctrine/annotations": "^1.12"
+        "doctrine/annotations": "^1.12",
+        "respect/validation": "^2.2",
+        "twig/twig": "^3.0"
     },
     "autoload": {
         "psr-4": {

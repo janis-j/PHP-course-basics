@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\Person\Person;
-
 class PersonsCollection
 {
     private array $collection;
 
     public function collection(): array
     {
-        return $this->collection;
+        $personsList = [];
+        foreach($this->collection as $person){
+            $personsList[] = $person->toArray();
+        }
+        return $personsList;
     }
 
     public function add(Person $person): void

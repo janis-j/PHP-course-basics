@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Persons;
 
-use App\Models\Person\Person;
+use App\Models\Person;
 use Medoo\Medoo;
 
 class MYSQLPersonsRepository implements PersonsRepository
@@ -15,8 +15,8 @@ class MYSQLPersonsRepository implements PersonsRepository
             'database_type' => 'mysql',
             'database_name' => 'codelex',
             'server' => 'localhost',
-            'username' => '',
-            'password' => ''
+            'username' => 'janis',
+            'password' => 'Maximus21@'
         ]);
     }
 
@@ -27,13 +27,16 @@ class MYSQLPersonsRepository implements PersonsRepository
 
     public function getPersons(): array
     {
+
         return $this->database->select("Registry", [
             "id",
             "name",
             "surname",
+            "age",
+            "address",
             "description"
         ], [
-            "{$_POST['radioInput']}[=]" => $_POST['textInput']
+            "{$_POST['radioInput']}[~]" => $_POST['textInput']
         ]);
     }
 

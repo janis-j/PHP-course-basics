@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Persons;
 
-use App\Models\Person\Person;
+use App\Models\Person;
 
 interface PersonsRepository
 {
