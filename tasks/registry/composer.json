@@ -15,7 +15,9 @@
       "ext-json": "*",
         "doctrine/annotations": "^1.12",
         "respect/validation": "^2.2",
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "finnhub/client": "^1.1",
+      "ext-openssl": "*"
     },
     "autoload": {
         "psr-4": {

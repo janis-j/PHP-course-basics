@@ -4,7 +4,7 @@ namespace App\Models;
 
 class PersonsCollection
 {
-    private array $collection;
+    private array $collection =[];
 
     public function collection(): array
     {
@@ -18,5 +18,13 @@ class PersonsCollection
     public function add(Person $person): void
     {
         $this->collection[] = $person;
+    }
+
+    public function person(): Person
+    {
+        foreach($this->collection as $person){
+            return $person;
+        }
+        exit;
     }
 }

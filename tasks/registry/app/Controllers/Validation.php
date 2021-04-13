@@ -58,5 +58,8 @@ class Validation
         }
     }
 
+    public function validateAll():array
+    {
 
+    }
 }

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+<div>
+    <div class="flex mx-auto flex-col bg-green-100  p-20 w-3/6 m-20 rounded-lg shadow-lg">
+        <form method="post" action="/">
+            <label for="inputData"></label><input type="text" class="rounded mb-4" id="inputData" name="idInput"><br>
+            <input type="submit" class="mb-2 bg-blue-500 hover:bg-blue-700 text-white px-2 rounded" value="Login"
+                   name="Login">  <br>
+            <comment> {{ loginError }} </comment>
+            <br><br>
+            <a href="http:\\{{ link }}">{{ link }}</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

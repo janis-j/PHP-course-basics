@@ -9,12 +9,18 @@
     <title>Home</title>
 </head>
 <body class="font-Helvetica">
+<div class="container mx-auto text-right">
+    <form method = "get" action = "/logout">
+        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white rounded"
+               value="logout" name="logout">
+    </form>
+</div>
 <div class="grid grid-cols-1 gap-2 m-2">
     <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
         <h2>DATABASE</h2>
         <form method="post" action="/search">
             <label for="inputData"></label>
-            <input type="text" id="inputData" class="rounded" name="textInput">
+            <input type="text" id="inputData" class="rounded mb-2" name="textInput">
             <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
                    value="search" name="search"><br>
             Search by
@@ -61,7 +67,7 @@
             <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded" value="delete person"
                    name="delete">
             <br><br>
-            <label for="input"></label><input type="text" class="rounded" id="input" name="descriptionInput">
+            <label for="input"></label><input type="text" class="rounded mb-2" id="input" name="descriptionInput">
             <br>
             <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded"
                    value="change description"  name="change" formaction="/change">
@@ -121,7 +127,7 @@
                 </tr>
                 <tr>
                     <td><label for="input6">Description:</label></td>
-                    <td><input type="text" class="rounded" id="input6" name="description"></td>
+                    <td><input type="text" class="rounded mb-2" id="input6" name="description"></td>
                 </tr>
             </table>
             <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded" value="store person"

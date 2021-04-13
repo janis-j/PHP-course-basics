@@ -25,7 +25,7 @@ class MYSQLPersonsRepository implements PersonsRepository
         $this->database->insert("Registry", $person->toArray());
     }
 
-    public function getPersons(): array
+    public function getPersons(string $searchField, string $textInput): array
     {
 
         return $this->database->select("Registry", [
@@ -36,7 +36,7 @@ class MYSQLPersonsRepository implements PersonsRepository
             "address",
             "description"
         ], [
-            "{$_POST['radioInput']}[~]" => $_POST['textInput']
+            "{$searchField}[~]" => $textInput
         ]);
     }
 
@@ -55,6 +55,20 @@ class MYSQLPersonsRepository implements PersonsRepository
             "description" => $idDescription[0]
         ], [
             "id[=]" => $idDescription[1]
+        ]);
+    }
+
+    public function getPerson(string $textInput): array
+    {
+        return $this->database->select("Registry", [
+            "id",
+            "name",
+            "surname",
+            "age",
+            "address",
+            "description"
+        ], [
+            "id[=]" => $textInput
         ]);
     }
 }

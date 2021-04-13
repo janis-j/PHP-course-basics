@@ -28,10 +28,10 @@ class StorePersonService
             $this->personsRepository->save($person);
     }
 
-    public function executeSearch(): PersonsCollection
+    public function executeSearch(string $searchField, string $textInput): PersonsCollection
     {
         $collection = new PersonsCollection();
-        foreach ($this->personsRepository->getPersons() as $person) {
+        foreach ($this->personsRepository->getPersons($searchField, $textInput) as $person) {
             $collection->add(new Person(
                 $person["id"],
                 $person["name"],

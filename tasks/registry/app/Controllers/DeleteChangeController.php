@@ -14,7 +14,7 @@ class DeleteChangeController
     public function __construct(DeleteChangePersonService $service)
     {
         $this->service = $service;
-        $loader = new FilesystemLoader('/home/janis/PhpstormProjects/PHP-course/tasks/registry/app/Views');
+        $loader = new FilesystemLoader('../app/Views');
         $this->twig = new Environment($loader);
     }
 

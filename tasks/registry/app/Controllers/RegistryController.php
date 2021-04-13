@@ -4,35 +4,44 @@ namespace App\Controllers;
 
 use App\Services\StorePersonRequest;
 use App\Services\StorePersonService;
+use App\Services\TokenService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-class HomeController
+class RegistryController
 {
     private StorePersonService $service;
     private Environment $twig;
+    private TokenService $tokenService;
 
-    public function __construct(StorePersonService $storePersonService)
+    public function __construct(StorePersonService $storePersonService, TokenService $tokenService)
     {
         $this->service = $storePersonService;
-        $loader = new FilesystemLoader('/home/janis/PhpstormProjects/PHP-course/tasks/registry/app/Views');
+        $loader = new FilesystemLoader('../app/Views');
         $this->twig = new Environment($loader);
+        $this->tokenService = $tokenService;
     }
 
-    public function index()
+    public function index(): string
     {
-        echo $this->twig->render('HomeView.twig');
+        if(!$this->tokenService->validation('id',$_SESSION['id'])){
+            session_destroy();
+        }
+        if (!isset($_SESSION['id'])) {
+            header('Location: /login');
+        }
+        return $this->twig->render('HomeView.twig');
     }
 
-    public function search()
+    public function search(): string
     {
-        echo $this->twig->render('HomeView.twig', [
-            'personsList' => $this->service->executeSearch()->collection(),
+        return $this->twig->render('HomeView.twig', [
+            'personsList' => $this->service->executeSearch($_POST['radioInput'], $_POST['textInput'])->collection(),
             'post' => $_POST
         ]);
     }
 
-    public function store()
+    public function store(): string
     {
         $validation = new Validation();
         $validId = $validation->id($_POST['id']);
@@ -53,13 +62,11 @@ class HomeController
             ));
         }
         require_once 'Validation.php';
-        echo $this->twig->render('HomeView.twig',
-            [
-                'validId' => $validId,
-                'validName' => $validName,
-                'validSurname' => $validSurname,
-                'validAge' => $validAge,
-            ]
-        );
+        return $this->twig->render('HomeView.twig', [
+            'validId' => $validId,
+            'validName' => $validName,
+            'validSurname' => $validSurname,
+            'validAge' => $validAge,
+        ]);
     }
 }
