@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 use App\Repositories\Wallet\WalletRepository;
 
 class StoreMoneyService

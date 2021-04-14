@@ -28,6 +28,6 @@ class MySQLWalletRepository implements WalletRepository
 
     public function balance(): int
     {
-        return $this->database->select("Wallet", "*")['amount'];
+        return $this->database->select("Wallet", "*")[0]['amount'];
     }
 }

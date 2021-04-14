@@ -11,13 +11,15 @@ use App\Repositories\Stocks\StocksRepository;
 use App\Repositories\Wallet\MySQLWalletRepository;
 use App\Repositories\Wallet\WalletRepository;
 use App\Services\QuoteStockService;
+use App\Services\StoreMoneyService;
 use App\Services\StoreStocksService;
 
 $container = new League\Container\Container;
 
 $container->add(BuyController::class, BuyController::class)
     ->addArgument(QuoteStockService::class)
-    ->addArgument(StoreStocksService::class);
+    ->addArgument(StoreStocksService::class)
+    ->addArgument(StoreMoneyService::class);
 
 $container->add(QuoteStockService::class, QuoteStockService::class)
     ->addArgument(QuoteStocksRepository::class);
@@ -26,7 +28,8 @@ $container->add(StoreMoneyService::class, StoreMoneyService::class)
     ->addArgument(WalletRepository::class);
 
 $container->add(HomeController::class, HomeController::class)
-    ->addArgument(StoreStocksService::class);
+    ->addArgument(StoreStocksService::class)
+    ->addArgument(StoreMoneyService::class);
 
 $container->add(StoreStocksService::class, StoreStocksService::class)
     ->addArgument(StocksRepository::class);

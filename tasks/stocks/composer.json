@@ -16,7 +16,8 @@
         "doctrine/annotations": "^1.12",
         "respect/validation": "^2.2",
         "twig/twig": "^3.0",
-        "finnhub/client": "^1.1"
+        "finnhub/client": "^1.1",
+      "ext-intl": "*"
     },
     "autoload": {
         "psr-4": {
