@@ -13,7 +13,7 @@
     <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
         <table>
             <tr>
-                <td style="width: 80px" >Wallet: </td>
+                <td style="width: 80px">Wallet:</td>
                 <th style="width: 80px" class="border border-green-600">{{ balance }}</th>
             </tr>
         </table>
@@ -25,29 +25,28 @@
             <table class="table-auto border-separate border">
                 <tr>
                     <th></th>
-                    <th class="border border-green-600">Stock name</th>
                     <th class="border border-green-600">Amount</th>
-                    <th class="border border-green-600">Price when bought</th>
-                    <th ></th>
+                    <th class="border border-green-600">Price at</th>
+                    <th class="border border-green-600">Date</th>
+                    <th></th>
                     <th class="border border-green-600">Actual price</th>
                     <td>🔻</td>
-                    <th>
-                        <input type="submit" value="SELL" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded">
-                    </th>
                 </tr>
-                {% if post.search is defined %}
-                    {% for person in personsList %}
-                        <tr>
-                            <td><label for='column1'></label><input type='radio' id='column1' name='pickPerson' value={{ person.id }}>
-                            <td class="border border-green-600">{{ person.id }}</td>
-                            <td class="border border-green-600">{{ person.name }}</td>
-                            <td class="border border-green-600">{{ person.surname }}</td>
-                            <td class="border border-green-600">{{ person.age }}</td>
-                            <td class="border border-green-600">{{ person.address }}</td>
-                            <td class="border border-green-600">{{ person.description }}</td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
+                {% for stock in stockList %}
+                    <tr>
+                        <td class="border border-green-600">{{ stock.name }}</td>
+                        <td class="border border-green-600">{{ stock.amount }}</td>
+                        <td class="border border-green-600">{{ stock.price }}</td>
+                        <td class="border border-green-600">{{ stock.date }}</td>
+                        <td></td>
+                        <td class="border border-green-600">{{ person.description }}</td>
+                        <td></td>
+                        <th>
+                            <input type="submit" value="SELL" id="{{ stock.id }}"
+                                   class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded">
+                        </th>
+                    </tr>
+                {% endfor %}
             </table>
         </form>
     </div>
@@ -71,6 +70,7 @@
             </table>
             <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded" value="BUY"
                    name="buy">
+            <comment class="{{ error  ?  'text-red-600'  :  'text-red-600' }}"> {{ errorMsg }} </comment>
         </form>
     </div>
 </div>

@@ -10,12 +10,14 @@ class StoreStockRequest
     private string $name;
     private string $amount;
     private int $price;
+    private int $timestamp;
 
     public function __construct(
         string $id,
         string $name,
         string $amount,
-        int $price
+        int $price,
+        int $timestamp
     )
     {
 
@@ -23,6 +25,7 @@ class StoreStockRequest
         $this->setName($name);
         $this->setAmount($amount);
         $this->price = $price;
+        $this->timestamp = $timestamp;
     }
 
     public function id(): string
@@ -45,6 +48,11 @@ class StoreStockRequest
         return $this->price;
     }
 
+    public function timestamp(): int
+    {
+        return $this->timestamp;
+    }
+
     private function setName(string $name): void
     {
         $this->name = $name;
@@ -53,6 +61,11 @@ class StoreStockRequest
     private function setAmount(string $amount): void
     {
         $this->amount = $amount;
+    }
+
+    private function setTimestamp(int $timestamp): void
+    {
+        $this->timestamp = $timestamp;
     }
 
 }

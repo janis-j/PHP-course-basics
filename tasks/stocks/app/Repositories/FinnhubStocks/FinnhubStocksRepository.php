@@ -13,7 +13,7 @@ class FinnhubStocksRepository implements QuoteStocksRepository
 
     public function __construct()
     {
-        $config = Configuration::getDefaultConfiguration()->setApiKey('token', '');
+        $config = Configuration::getDefaultConfiguration()->setApiKey('token', 'c1qu1faad3iatqdn3dlg');
         $this->client = new DefaultApi(
             new Client(),
             $config

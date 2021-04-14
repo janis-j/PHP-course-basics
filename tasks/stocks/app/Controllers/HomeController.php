@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Services\StoreStocksService;
+use App\Services\QuoteStockService;
+use App\Services\StoreStockService;
 use App\Services\StoreMoneyService;
 use NumberFormatter;
 use Twig\Environment;
@@ -10,20 +11,26 @@ use Twig\Loader\FilesystemLoader;
 
 class HomeController
 {
-    private StoreStocksService $storeStocksService;
+    private StoreStockService $storeStockService;
     private StoreMoneyService $storeMoneyService;
+    private QuoteStockService $quoteStockService;
     private Environment $twig;
 
-    public function __construct(StoreStocksService $storeStocksService, StoreMoneyService $storeMoneyService)
+    public function __construct(StoreStockService $storeStockService,
+                                StoreMoneyService $storeMoneyService,
+                                QuoteStockService $quoteStockService
+    )
     {
-        $this->storeStocksService = $storeStocksService;
+        $this->storeStockService = $storeStockService;
         $this->storeMoneyService = $storeMoneyService;
+        $this->quoteStockService = $quoteStockService;
         $loader = new FilesystemLoader('../app/Views');
         $this->twig = new Environment($loader);
     }
 
     public function index(): string
     {
+
         $f = new NumberFormatter("en", NumberFormatter::CURRENCY);
         $errorMsg = '';
         $balance = $this->storeMoneyService->balance();
@@ -32,7 +39,8 @@ class HomeController
         }
         return $this->twig->render('HomeView.twig',[
             'errorMsg' => $errorMsg,
-            'balance' => $f->formatCurrency($balance / 100, "EUR")
+            'balance' => $f->formatCurrency($balance / 100, "USD"),
+            'stockList' => $this->storeStockService->executeSearch()
         ]);
     }
 

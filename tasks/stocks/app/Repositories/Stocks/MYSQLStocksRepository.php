@@ -3,6 +3,7 @@
 namespace App\Repositories\Stocks;
 
 use App\Models\Stock;
+use App\Models\StocksCollection;
 use Medoo\Medoo;
 
 class MYSQLStocksRepository implements StocksRepository
@@ -25,22 +26,21 @@ class MYSQLStocksRepository implements StocksRepository
         $this->database->insert("Stocks", $stock->toArray());
     }
 
-    public function getStocks(): ?Stock
+    public function getStocks(): ?StocksCollection
     {
-        $stock = $this->database->select("Stocks", [
-            "id",
-            "name",
-            "amount",
-            "price",
-        ], [
-            "{$_POST['radioInput']}[~]" => $_POST['textInput']
-        ]);
-        return new Stock(
-            $stock[0]['id'],
-            $stock[0]['name'],
-            $stock[0]['amount'],
-            $stock[0]['price']
-        );
+        $stocks = $this->database->select("Stocks", '*');
+        $collection = new StocksCollection();
+
+        foreach ($stocks as $stock) {
+            $collection->add(new Stock(
+                $stock['id'],
+                $stock['name'],
+                $stock['amount'],
+                $stock['price'],
+                $stock['timestamp']
+            ));
+        }
+        return $collection;
     }
 
     public function sellStocks(string $id): void

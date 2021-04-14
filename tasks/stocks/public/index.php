@@ -12,14 +12,17 @@ use App\Repositories\Wallet\MySQLWalletRepository;
 use App\Repositories\Wallet\WalletRepository;
 use App\Services\QuoteStockService;
 use App\Services\StoreMoneyService;
-use App\Services\StoreStocksService;
+use App\Services\StoreStockService;
+
+session_start();
 
 $container = new League\Container\Container;
 
 $container->add(BuyController::class, BuyController::class)
-    ->addArgument(QuoteStockService::class)
-    ->addArgument(StoreStocksService::class)
-    ->addArgument(StoreMoneyService::class);
+    ->addArguments([
+        QuoteStockService::class,
+        StoreStockService::class,
+        StoreMoneyService::class]);
 
 $container->add(QuoteStockService::class, QuoteStockService::class)
     ->addArgument(QuoteStocksRepository::class);
@@ -28,10 +31,13 @@ $container->add(StoreMoneyService::class, StoreMoneyService::class)
     ->addArgument(WalletRepository::class);
 
 $container->add(HomeController::class, HomeController::class)
-    ->addArgument(StoreStocksService::class)
-    ->addArgument(StoreMoneyService::class);
+    ->addArguments([
+        StoreStockService::class,
+        StoreMoneyService::class,
+        QuoteStockService::class
+    ]);
 
-$container->add(StoreStocksService::class, StoreStocksService::class)
+$container->add(StoreStockService::class, StoreStockService::class)
     ->addArgument(StocksRepository::class);
 
 $container->add(QuoteStocksRepository::class, FinnhubStocksRepository::class);
@@ -58,7 +64,7 @@ $uri = rawurldecode($uri);
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 
-var_dump($_POST);
+var_dump($_SESSION);
 
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
@@ -76,5 +82,6 @@ switch ($routeInfo[0]) {
         break;
 }
 
-
-
+if ($httpMethod == 'GET' && isset($_SESSION['_message'])) {
+    unset($_SESSION['_message']);
+}

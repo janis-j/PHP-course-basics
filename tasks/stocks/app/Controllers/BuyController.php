@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Services\QuoteStockService;
 use App\Services\StoreStockRequest;
-use App\Services\StoreStocksService;
+use App\Services\StoreStockService;
 use App\Services\StoreMoneyService;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -13,17 +13,17 @@ class BuyController
 {
     private Environment $twig;
     private QuoteStockService $quoteStockService;
-    private StoreStocksService $storeStocksService;
+    private StoreStockService $storeStockService;
     private StoreMoneyService $storeMoneyService;
 
     public function __construct(
         QuoteStockService $quoteStockService,
-        StoreStocksService $storeStocksService,
+        StoreStockService $storeStockService,
         StoreMoneyService $storeMoneyService
     )
     {
         $this->quoteStockService = $quoteStockService;
-        $this->storeStocksService = $storeStocksService;
+        $this->storeStockService = $storeStockService;
         $this->storeMoneyService = $storeMoneyService;
         $loader = new FilesystemLoader('../app/Views');
         $this->twig = new Environment($loader);
@@ -31,16 +31,20 @@ class BuyController
 
     public function buy()
     {
-        $price = $this->quoteStockService->executeSearch($_POST['name']);
-        $this->storeStocksService->executeStore(
+        $name = strtoupper($_POST['name']);
+        $amount = $_POST['amount'];
+        $price = $this->quoteStockService->executeSearch($name);
+        $time = time();
+        $this->storeStockService->executeStore(
             new StoreStockRequest(
                 0,
-                $_POST['name'],
-                $_POST['amount'],
-                $price
+                $name,
+                $amount,
+                $price,
+                $time
             )
         );
-        if (!$this->storeMoneyService->execute($price * $_POST['amount'])) {
+        if (!$this->storeMoneyService->execute($price * $amount)) {
             $_SESSION['_message']['errorMsg'] = 'Insufficient funds!!!';
         }
         header('location: /');

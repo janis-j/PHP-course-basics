@@ -6,7 +6,7 @@ use App\Models\Stock;
 use App\Models\StocksCollection;
 use App\Repositories\Stocks\StocksRepository;
 
-class StoreStocksService
+class StoreStockService
 {
     private StocksRepository $stocksRepository;
 
@@ -21,22 +21,14 @@ class StoreStocksService
             $request->id(),
             $request->name(),
             $request->amount(),
-            $request->price()
+            $request->price(),
+            $request->timestamp()
         );
             $this->stocksRepository->save($stock);
     }
 
-    public function executeSearch(): StocksCollection
+    public function executeSearch(): array
     {
-        $collection = new StocksCollection();
-        foreach ($this->stocksRepository->getStocks() as $stock) {
-            $collection->add(new Stock(
-                $stock["id"],
-                $stock["name"],
-                $stock["amount"],
-                $stock["price"],
-            ));
-        }
-        return $collection;
+        return $this->stocksRepository->getStocks()->collection();
     }
 }
