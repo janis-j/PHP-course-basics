@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body class="font-Helvetica">
+<div class="grid grid-cols-1 gap-2 m-2">
+    <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
+        <table>
+            <tr>
+                <td style="width: 80px" >Wallet: </td>
+                <th style="width: 80px" class="border border-green-600">{{ balance }}</th>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
+        <h2>Stocks bought</h2>
+        <form method="post" action="/delete">
+            <table class="table-auto border-separate border">
+                <tr>
+                    <th></th>
+                    <th class="border border-green-600">Stock name</th>
+                    <th class="border border-green-600">Amount</th>
+                    <th class="border border-green-600">Price when bought</th>
+                    <th ></th>
+                    <th class="border border-green-600">Actual price</th>
+                    <td>🔻</td>
+                    <th>
+                        <input type="submit" value="SELL" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded">
+                    </th>
+                </tr>
+                {% if post.search is defined %}
+                    {% for person in personsList %}
+                        <tr>
+                            <td><label for='column1'></label><input type='radio' id='column1' name='pickPerson' value={{ person.id }}>
+                            <td class="border border-green-600">{{ person.id }}</td>
+                            <td class="border border-green-600">{{ person.name }}</td>
+                            <td class="border border-green-600">{{ person.surname }}</td>
+                            <td class="border border-green-600">{{ person.age }}</td>
+                            <td class="border border-green-600">{{ person.address }}</td>
+                            <td class="border border-green-600">{{ person.description }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+        </form>
+    </div>
+    <br>
+    <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
+        <h1>Buy stocks</h1>
+        <form method="post" action="/">
+            <table>
+                <tr>
+                    <td><label for="input2">Which stock:</label></td>
+                    <td><input type="text" class="rounded" id="input2" name="name" size="12">
+                        <comment class="{{ error  ?  'text-red-600'  :  'text-red-600' }}"> {{ validName }} </comment>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="input4">How much:</label></td>
+                    <td><input type="number" class="rounded" id="input4" name="amount" size="3" max="105">
+                        <comment class="{{ error  ?  'text-red-600'  :  'text-red-600' }}"> {{ validAge }} </comment>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded" value="BUY"
+                   name="buy">
+        </form>
+    </div>
+</div>
+</body>
+</html>
