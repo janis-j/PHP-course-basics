@@ -35,6 +35,7 @@ class BuyController
         $amount = $_POST['amount'];
         $price = $this->quoteStockService->executeSearch($name);
         $time = time();
+
         $this->storeStockService->executeStore(
             new StoreStockRequest(
                 0,

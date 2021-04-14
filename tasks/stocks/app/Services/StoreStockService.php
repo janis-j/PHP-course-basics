@@ -3,16 +3,20 @@
 namespace App\Services;
 
 use App\Models\Stock;
-use App\Models\StocksCollection;
 use App\Repositories\Stocks\StocksRepository;
 
 class StoreStockService
 {
     private StocksRepository $stocksRepository;
+    private QuoteStockService $quoteStockService;
 
-    public function __construct(StocksRepository $stocksRepository)
+    public function __construct(
+        StocksRepository $stocksRepository,
+        QuoteStockService $quoteStockService
+    )
     {
         $this->stocksRepository = $stocksRepository;
+        $this->quoteStockService = $quoteStockService;
     }
 
     public function executeStore(StoreStockRequest $request): void
@@ -24,11 +28,17 @@ class StoreStockService
             $request->price(),
             $request->timestamp()
         );
-            $this->stocksRepository->save($stock);
+
+        $this->stocksRepository->save($stock);
     }
 
     public function executeSearch(): array
     {
-        return $this->stocksRepository->getStocks()->collection();
+        $newCollection = [];
+        $collection = $this->stocksRepository->getStocks()->collection();
+        foreach ($collection as $stock) {
+            $newCollection[] = array_merge(['actual_price' => $this->quoteStockService->executeSearch($stock['name'])], $stock);
+        }
+       return $newCollection;
     }
 }

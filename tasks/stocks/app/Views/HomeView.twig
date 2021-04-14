@@ -30,17 +30,28 @@
                     <th class="border border-green-600">Date</th>
                     <th></th>
                     <th class="border border-green-600">Actual price</th>
-                    <td>🔻</td>
+                    <td></td>
                 </tr>
                 {% for stock in stockList %}
                     <tr>
                         <td class="border border-green-600">{{ stock.name }}</td>
-                        <td class="border border-green-600">{{ stock.amount }}</td>
-                        <td class="border border-green-600">{{ stock.price }}</td>
-                        <td class="border border-green-600">{{ stock.date }}</td>
+                        <th class="border border-green-600">{{ stock.amount }}</th>
+                        <td class="border border-green-600">{{ (stock.price/100)|number_format(2) }}</td>
+                        <td class="border border-green-600">{{ stock.date|date }}</td>
                         <td></td>
-                        <td class="border border-green-600">{{ person.description }}</td>
-                        <td></td>
+
+                        {% if stock.price < stock.actual_price %}
+                            <td class="border border-green-600 bg-green-500">{{ (stock.actual_price/100)|number_format(2) }}</td>
+
+                        {% elseif stock.price > stock.actual_price %}
+                            <td class="border border-green-600 bg-red-500">{{ (stock.actual_price/100)|number_format(2) }}</td>
+
+                        {% else %}
+                            <td class="border border-green-600">{{ (stock.actual_price/100)|number_format(2) }}</td>
+
+                        {% endif %}
+
+                        <td><img src='../../public/storage/green_triangle.png' alt="up"/></td>
                         <th>
                             <input type="submit" value="SELL" id="{{ stock.id }}"
                                    class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded">

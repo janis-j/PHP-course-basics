@@ -84,7 +84,7 @@ class Stock
             "name" => $this->name(),
             "amount" => $this->amount(),
             "price" => $this->price(),
-            "date" => date('m/d/Y H:i:s', $this->timestamp())
+            "date" => $this->timestamp()
         ];
     }
 }

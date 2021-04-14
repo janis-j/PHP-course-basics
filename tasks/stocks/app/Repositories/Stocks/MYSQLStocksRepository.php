@@ -37,7 +37,7 @@ class MYSQLStocksRepository implements StocksRepository
                 $stock['name'],
                 $stock['amount'],
                 $stock['price'],
-                $stock['timestamp']
+                $stock['date']
             ));
         }
         return $collection;

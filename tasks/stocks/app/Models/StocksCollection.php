@@ -4,7 +4,7 @@ namespace App\Models;
 
 class StocksCollection
 {
-    private array $collection;
+    private array $collection = [];
 
     public function collection(): array
     {

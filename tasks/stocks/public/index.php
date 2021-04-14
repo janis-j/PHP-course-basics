@@ -4,6 +4,7 @@ require '../vendor/autoload.php';
 
 use App\Controllers\BuyController;
 use App\Controllers\HomeController;
+use App\Models\StocksCollection;
 use App\Repositories\FinnhubStocks\FinnhubStocksRepository;
 use App\Repositories\FinnhubStocks\QuoteStocksRepository;
 use App\Repositories\Stocks\MYSQLStocksRepository;
@@ -33,12 +34,14 @@ $container->add(StoreMoneyService::class, StoreMoneyService::class)
 $container->add(HomeController::class, HomeController::class)
     ->addArguments([
         StoreStockService::class,
-        StoreMoneyService::class,
-        QuoteStockService::class
+        StoreMoneyService::class
     ]);
 
 $container->add(StoreStockService::class, StoreStockService::class)
-    ->addArgument(StocksRepository::class);
+    ->addArguments([
+        StocksRepository::class,
+        QuoteStockService::class
+        ]);
 
 $container->add(QuoteStocksRepository::class, FinnhubStocksRepository::class);
 
