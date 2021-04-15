@@ -6,9 +6,33 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        @media (min-width: 640px) {
+            table {
+                display: inline-table !important;
+            }
+
+            thead tr:not(:first-child) {
+                display: none;
+            }
+        }
+
+        td:not(:last-child) {
+            border-bottom: 0;
+        }
+
+        th:not(:last-child) {
+            border-bottom: 2px solid rgba(0, 0, 0, .1);
+        }
+    </style>
     <title>Home</title>
 </head>
-<body class="font-Helvetica">
+<body class="flex items-center justify-center">
 <div class="grid grid-cols-1 gap-2 m-2">
     <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
         <table>
@@ -21,45 +45,46 @@
     <br>
     <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
         <h2>Stocks bought</h2>
-        <form method="post" action="/delete">
-            <table class="table-auto border-separate border">
-                <tr>
-                    <th></th>
-                    <th class="border border-green-600">Amount</th>
-                    <th class="border border-green-600">Price at</th>
-                    <th class="border border-green-600">Date</th>
-                    <th></th>
-                    <th class="border border-green-600">Actual price</th>
-                    <td></td>
-                </tr>
-                {% for stock in stockList %}
-                    <tr>
-                        <td class="border border-green-600">{{ stock.name }}</td>
-                        <th class="border border-green-600">{{ stock.amount }}</th>
-                        <td class="border border-green-600">{{ (stock.price/100)|number_format(2) }}</td>
-                        <td class="border border-green-600">{{ stock.date|date }}</td>
-                        <td></td>
-
-                        {% if stock.price < stock.actual_price %}
-                            <td class="border border-green-600 bg-green-500">{{ (stock.actual_price/100)|number_format(2) }}</td>
-
-                        {% elseif stock.price > stock.actual_price %}
-                            <td class="border border-green-600 bg-red-500">{{ (stock.actual_price/100)|number_format(2) }}</td>
-
-                        {% else %}
-                            <td class="border border-green-600">{{ (stock.actual_price/100)|number_format(2) }}</td>
-
-                        {% endif %}
-
-                        <td><img src='../../public/storage/green_triangle.png' alt="up"/></td>
-                        <th>
-                            <input type="submit" value="SELL" id="{{ stock.id }}"
-                                   class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded">
-                        </th>
+        <div class="container">
+            <form method="post" action="/delete">
+                <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+                    <thead class="text-white">
+                    <tr class="bg-blue-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                        <th></th>
+                        <th class="p-3 text-left">Amount</th>
+                        <th class="p-3 text-left">Price at</th>
+                        <th class="p-3 text-left">Date</th>
+                        <th class="p-3 text-left">Actual price</th>
+                        <td class="p-3 text-left"></td>
                     </tr>
-                {% endfor %}
-            </table>
-        </form>
+                    </thead>
+                    <tbody class="flex-1 sm:flex-none">
+                    {% for stock in stockList %}
+                        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+                            <td class="border-grey-light border hover:bg-gray-100 p-3">{{ stock.name }}</td>
+                            <td class="border-grey-light border hover:bg-gray-100 p-3 text-center">{{ stock.amount }}</td>
+                            <td class="border-grey-light border hover:bg-gray-100 p-3">
+                                {{ (stock.price/100)|number_format(2) }}</td>
+                            <td class="border-grey-light border hover:bg-gray-100 p-3 ">{{ stock.date|date }}</td>
+                            {% if stock.price < stock.actual_price %}
+                                <td class="border-grey-light border bg-green-500 p-3 text-center">
+                                    ⬆ {{ (stock.actual_price/100)|number_format(2) }}</td>
+                            {% elseif stock.price > stock.actual_price %}
+                                <td class="border-grey-light border bg-red-500 p-3 text-center">
+                                    ⬇ {{ (stock.actual_price/100)|number_format(2) }}</td>
+                            {% else %}
+                                <td class="border-grey-light border p-3 text-center">{{ (stock.actual_price/100)|number_format(2) }}</td>
+                            {% endif %}
+                            <td class="border-grey-light border hover:bg-gray-100 p-3">
+                                <input type="submit" value="SELL" id="{{ stock.id }}"
+                                       class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
     </div>
     <br>
     <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">

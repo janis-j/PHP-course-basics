@@ -4,7 +4,6 @@ require '../vendor/autoload.php';
 
 use App\Controllers\BuyController;
 use App\Controllers\HomeController;
-use App\Models\StocksCollection;
 use App\Repositories\FinnhubStocks\FinnhubStocksRepository;
 use App\Repositories\FinnhubStocks\QuoteStocksRepository;
 use App\Repositories\Stocks\MYSQLStocksRepository;
@@ -66,8 +65,6 @@ if (false !== $pos = strpos($uri, '?')) {
 $uri = rawurldecode($uri);
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-
-var_dump($_SESSION);
 
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:

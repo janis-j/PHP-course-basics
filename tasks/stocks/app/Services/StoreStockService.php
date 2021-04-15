@@ -37,7 +37,8 @@ class StoreStockService
         $newCollection = [];
         $collection = $this->stocksRepository->getStocks()->collection();
         foreach ($collection as $stock) {
-            $newCollection[] = array_merge(['actual_price' => $this->quoteStockService->executeSearch($stock['name'])], $stock);
+            $newCollection[] = array_merge(['actual_price' => $this->quoteStockService->executeSearch($stock['name'])],
+                $stock);
         }
        return $newCollection;
     }
