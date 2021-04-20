@@ -17,7 +17,7 @@ class StoreMoneyService
     {
        $balance = $this->walletRepository->balance();
        if($balance > $amount){
-            $this->walletRepository->change($balance - $amount);
+            $this->walletRepository->change(-$amount);
             return true;
        }else{
            return false;
