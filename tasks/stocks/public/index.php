@@ -4,6 +4,7 @@ require '../vendor/autoload.php';
 
 use App\Controllers\BuyController;
 use App\Controllers\HomeController;
+use App\Controllers\SellController;
 use App\Repositories\FinnhubStocks\FinnhubStocksRepository;
 use App\Repositories\FinnhubStocks\QuoteStocksRepository;
 use App\Repositories\Stocks\MYSQLStocksRepository;
@@ -17,6 +18,9 @@ use App\Services\StoreStockService;
 session_start();
 
 $container = new League\Container\Container;
+
+$container->add(SellController::class, SellController::class)
+    ->addArgument(StoreStockService::class);
 
 $container->add(BuyController::class, BuyController::class)
     ->addArguments([
@@ -39,8 +43,9 @@ $container->add(HomeController::class, HomeController::class)
 $container->add(StoreStockService::class, StoreStockService::class)
     ->addArguments([
         StocksRepository::class,
-        QuoteStockService::class
-        ]);
+        QuoteStockService::class,
+        WalletRepository::class
+    ]);
 
 $container->add(QuoteStocksRepository::class, FinnhubStocksRepository::class);
 
@@ -48,9 +53,9 @@ $container->add(StocksRepository::class, MYSQLStocksRepository::class);
 
 $container->add(WalletRepository::class, MySQLWalletRepository::class);
 
-
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute(['GET'], '/', [HomeController::class, 'index']);
+    $r->addRoute(['POST'], '/sell/{id:\d+}', [SellController::class, 'index']);
     $r->addRoute(['POST'], '/display', [HomeController::class, 'display']);
     $r->addRoute(['POST'], '/', [BuyController::class, 'buy']);
     $r->addRoute(['POST'], '/store', [HomeController::class, 'store']);

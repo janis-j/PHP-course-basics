@@ -23,12 +23,12 @@ class MYSQLStocksRepository implements StocksRepository
 
     public function save(Stock $stock): void
     {
-        $this->database->insert("Stocks", $stock->toArray());
+        $this->database->insert("stocks", $stock->toArray());
     }
 
     public function getStocks(): ?StocksCollection
     {
-        $stocks = $this->database->select("Stocks", '*');
+        $stocks = $this->database->select("stocks", '*');
         $collection = new StocksCollection();
 
         foreach ($stocks as $stock) {
@@ -43,21 +43,33 @@ class MYSQLStocksRepository implements StocksRepository
         return $collection;
     }
 
-    public function sellStocks(string $id): void
+    public function getStock(int $id): ?Stock
     {
-        $this->database->delete("Registry", [
+        $stock = $this->database->select("stocks", [
+            "id",
+            "name",
+            "amount",
+            "price",
+            "date"
+        ], [
+            "id[=]" => $id
+        ])[0];
+
+        return new Stock(
+            $stock["id"],
+            $stock["name"],
+            $stock["amount"],
+            $stock["price"],
+            $stock["date"]
+        );
+    }
+
+    public function sellStock(string $id): void
+    {
+        $this->database->delete("stocks", [
             "AND" => [
                 "id" => $id,
             ]
         ]);
-    }
-
-    public function executeDescription(array $nameDescription): void
-    {
-//        $this->database->update("Registry", [
-//            "description" => $idDescription[0]
-//        ], [
-//            "id[=]" => $idDescription[1]
-//        ]);
     }
 }

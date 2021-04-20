@@ -21,13 +21,13 @@ class MySQLWalletRepository implements WalletRepository
 
     public function change(int $amount): void
     {
-        $this->database->update("Wallet", [
-            "amount" => $amount
+        $this->database->update("wallet", [
+            "amount[+]" => $amount
         ]);
     }
 
     public function balance(): int
     {
-        return $this->database->select("Wallet", "*")[0]['amount'];
+        return $this->database->select("wallet", "*")[0]['amount'];
     }
 }

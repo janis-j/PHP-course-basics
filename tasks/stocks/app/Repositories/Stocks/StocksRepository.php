@@ -11,7 +11,7 @@ interface StocksRepository
 
     public function getStocks(): ?StocksCollection;
 
-    public function sellStocks(string $id): void;
+    public function sellStock(string $id): void;
 
-    public function executeDescription(array $idDescription): void;
+    public function getStock(int $id): ?Stock;
 }

@@ -4,19 +4,23 @@ namespace App\Services;
 
 use App\Models\Stock;
 use App\Repositories\Stocks\StocksRepository;
+use App\Repositories\Wallet\WalletRepository;
 
 class StoreStockService
 {
     private StocksRepository $stocksRepository;
     private QuoteStockService $quoteStockService;
+    private WalletRepository $walletRepository;
 
     public function __construct(
         StocksRepository $stocksRepository,
-        QuoteStockService $quoteStockService
+        QuoteStockService $quoteStockService,
+        WalletRepository $walletRepository
     )
     {
         $this->stocksRepository = $stocksRepository;
         $this->quoteStockService = $quoteStockService;
+        $this->walletRepository = $walletRepository;
     }
 
     public function executeStore(StoreStockRequest $request): void
@@ -28,7 +32,6 @@ class StoreStockService
             $request->price(),
             $request->timestamp()
         );
-
         $this->stocksRepository->save($stock);
     }
 
@@ -40,6 +43,14 @@ class StoreStockService
             $newCollection[] = array_merge(['actual_price' => $this->quoteStockService->executeSearch($stock['name'])],
                 $stock);
         }
-       return $newCollection;
+        return $newCollection;
+    }
+
+    public function sellStock(int $id): void
+    {
+        $stock = $this->stocksRepository->getStock($id);
+        $actualPrice = $this->quoteStockService->executeSearch($stock->name());
+        $this->walletRepository->change($stock->amount() * $actualPrice);
+        $this->stocksRepository->sellStock($id);
     }
 }

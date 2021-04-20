@@ -38,7 +38,7 @@
         <table>
             <tr>
                 <td style="width: 80px">Wallet:</td>
-                <th style="width: 80px" class="border border-green-600">{{ balance }}</th>
+                <th style="width: 80px" class="border border-green-600 bg-white">{{ balance }}</th>
             </tr>
         </table>
     </div>
@@ -46,7 +46,6 @@
     <div class="container mx-auto bg-green-100 px-4 py-2 rounded-lg shadow-lg">
         <h2>Stocks bought</h2>
         <div class="container">
-            <form method="post" action="/delete">
                 <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
                     <thead class="text-white">
                     <tr class="bg-blue-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
@@ -76,14 +75,15 @@
                                 <td class="border-grey-light border p-3 text-center">{{ (stock.actual_price/100)|number_format(2) }}</td>
                             {% endif %}
                             <td class="border-grey-light border hover:bg-gray-100 p-3">
-                                <input type="submit" value="SELL" id="{{ stock.id }}"
+                                <form method="post" action="/sell/{{ stock.id }}">
+                                <input type="submit" value="SELL"
                                        class="bg-blue-500 hover:bg-blue-700 text-white px-2 rounded">
+                                </form>
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-            </form>
         </div>
     </div>
     <br>
